@@ -1,16 +1,14 @@
 <template>
   <v-container grid-list-md text-md-center fluid fill-height>
     <v-row>
-      <v-col v-for="i in rehabilitators" :key="i" cols="6">
-        <RehabilitatorCard :item="i" />
-      </v-col>
+        <session-form></session-form>
     </v-row>
   </v-container>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import RehabilitatorCard from "../components/RehabilitatorCard.vue";
+import SessionForm from "../components/SessionForm.vue";
 import SpecialistService from "../services/SpecialistService";
 import UserService from "../services/UserService";
 import { mapGetters } from 'vuex';
@@ -19,7 +17,7 @@ export default Vue.extend({
   name: "OurRehabilitators",
 
   components: {
-    RehabilitatorCard,
+    SessionForm
   },
 
   data() {

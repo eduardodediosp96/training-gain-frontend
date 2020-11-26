@@ -13,6 +13,7 @@
 import Vue from "vue";
 import UserCard from "@/components/UserCard.vue";
 import SesionService from "../services/SesionService";
+import { mapGetters } from 'vuex';
 
 export default Vue.extend({
   name: "OurSesions",
@@ -71,7 +72,7 @@ export default Vue.extend({
   },
   methods: {
     parseDTO: function() {
-      const response = SesionService.getSesions();
+      const response = SesionService.getSesions(this.token);
       console.log("chequeemos", response);
       this.sesionsDTO.map((x) => {
         const sesion = this.getSesions(x);
@@ -91,6 +92,9 @@ export default Vue.extend({
       };
     },
   },
+  computed: {
+    ...mapGetters(['user','isLogged','token'])
+  }
 });
 </script>
 

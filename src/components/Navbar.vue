@@ -2,7 +2,7 @@
   <v-row class="navbar">
     <v-col class="image-wrapper col-wrapper" cols="10"> </v-col>
     <v-col class="image-wrapper col-wrapper" cols="2">
-      {{ nombre }}
+      Hola, {{ nombre }}
     </v-col>
   </v-row>
 </template>
