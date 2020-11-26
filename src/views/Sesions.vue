@@ -1,8 +1,9 @@
+/* eslint-disable */
 <template>
   <v-container grid-list-md text-md-center fluid fill-height>
     <v-row>
       <v-col>
-        <UserCard v-for="i in sesions" :key="i" :item="i" />
+        <UserCard v-for="i in sesions" :key="i.id" :item="i" />
       </v-col>
     </v-row>
   </v-container>
@@ -10,11 +11,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-import UserCard from "../components/UserCard.vue";
+import UserCard from "@/components/UserCard.vue";
+import SesionService from "../services/SesionService";
+import { mapGetters } from 'vuex';
 
 export default Vue.extend({
-  name: "Sesions",
-
+  name: "OurSesions",
   components: {
     UserCard,
   },
@@ -31,21 +33,21 @@ export default Vue.extend({
           startDate: "2020-11-11T00:15:17.862Z",
         },
         {
-          id: 0,
+          id: 1,
           specialistId: 0,
           tittle: "Titulo 1",
           description: "string",
           startDate: "2020-11-11T00:15:17.862Z",
         },
         {
-          id: 0,
+          id: 2,
           specialistId: 0,
           tittle: "Titulo 1",
           description: "string",
           startDate: "2020-11-11T00:15:17.862Z",
         },
         {
-          id: 0,
+          id: 3,
           specialistId: 0,
           tittle: "Titulo 1",
           description: "string",
@@ -55,35 +57,33 @@ export default Vue.extend({
     };
   },
   created() {
-      this.parseDTO()
-    //   let self = this
-    //   axios.get('fetch-data')
-    //     .then((response) => {
-    //       let res: Players[] = response.data;
-    //       for(let i = 0; i < res.length; i++){
-    //           self.players.push(res[i]);
-    //       }
-    //     })
-    //     .catch((error: string) => {
-    //       console.log(error);
-    //    });
+    this.parseDTO();
   },
   methods: {
-    parseDTO: function() {
-      this.sesionsDTO.map((x) => {
+    parseDTO: async function() {
+      const response = await SesionService.getSesions(this.token);
+      console.log('asdasd',response.data)
+      response.data.map((x) => {
         const sesion = this.getSesions(x);
         this.sesions.push(sesion);
       });
     },
     getSesions: function(sesionDTO: any) {
       return {
-        title: sesionDTO.tittle || "",
+        title: sesionDTO.title || "",
         description: sesionDTO.description || "",
-        startDay: sesionDTO.startDate? new Date(sesionDTO.startDate).toISOString().substr(0, 10) : "",
-        hour: sesionDTO.startDate? new Date(sesionDTO.startDate).toISOString().substr(0, 10) : "",
+        startDay: sesionDTO.startDate
+          ? new Date(sesionDTO.startDate).toISOString().substr(0, 10)
+          : "",
+        hour: sesionDTO.startDate
+          ? new Date(sesionDTO.startDate).toISOString().substr(0, 10)
+          : "",
       };
     },
   },
+  computed: {
+    ...mapGetters(['user','isLogged','token'])
+  }
 });
 </script>
 
@@ -91,6 +91,7 @@ export default Vue.extend({
 .row {
   padding-left: 20px;
 }
+
 .col {
   padding-top: 0px;
   padding-bottom: 0px;

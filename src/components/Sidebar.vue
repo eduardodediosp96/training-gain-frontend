@@ -41,13 +41,13 @@ export default Vue.extend({
         href: "/rehabilitators",
       },
       {
-        text: "Mis Sesiones...",
-        href: "/oursesions",
+        text: "Nueva Sesion...",
+        href: "/newsession",
       },
-      {
-        text: "Editar mi Perfil...",
-        href: "/perfil",
-      },
+      // {
+      //   text: "Editar mi Perfil...",
+      //   href: "/perfil",
+      // },
       {
         text: "Planes...",
         href: "/plans",

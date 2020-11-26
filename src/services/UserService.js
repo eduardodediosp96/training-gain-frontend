@@ -1,21 +1,21 @@
 import { HTTP } from '../services/Api'
-
 export default {
-    getSesions(Authorization) {
+    getUsers(Authorization) {
         const config = {
             headers: {
                 Authorization: "Bearer " + Authorization,
             }
         }
-        return HTTP.get('/sessions', config)
-    },
+        return HTTP.get('/users', config)
 
-    postSesions(Authorization, dto) {
+    },
+    getUser(id, Authorization) {
         const config = {
             headers: {
                 Authorization: "Bearer " + Authorization,
             }
         }
-        return HTTP.post('/sessions', dto, config)
+        return HTTP.get('/users' + '/' + id, config)
+
     }
 }
